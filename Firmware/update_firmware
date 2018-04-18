@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if  [ -e lib/mcu/firmware_commit.h ]
+then
+  rm lib/mcu/firmware_commit.h
+fi
+
+VERSION=$(git rev-parse HEAD)
+echo "const char* g_firmware_commit = \"${VERSION}\";" >> lib/mcu/firmware_commit.h
+platformio run --target upload
